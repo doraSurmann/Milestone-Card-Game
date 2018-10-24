@@ -40,8 +40,27 @@ class Deck:
         return single_card
 
 
-test_deck=Deck()
+class PlayerCards:
+    def __init__(self):
+        self.cards_in_hand = []
+        self.total_value = 0
+        self.value_of_aces = 0
+
+    def add_card(self, card):
+        self.cards_in_hand.append(card)
+        self.total_value += values[card.rank]
+
+    def choose_value_for_ace(self):
+        pass
+
+
+test_deck = Deck()
 test_deck.shuffle()
 print(test_deck)
+
+test_player = PlayerCards()
+test_player.add_card(test_deck.get_a_card())
+test_player.add_card(test_deck.get_a_card())
+print(test_player.total_value)
 
 
