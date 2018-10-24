@@ -32,6 +32,8 @@ class Deck:
             cards_in_deck += '\n ' + card.__str__()  # add each Card object's print string
         return 'The deck has:' + cards_in_deck
 
+    def shuffle(self):
+        random.shuffle(self.deck)
 
 
 
