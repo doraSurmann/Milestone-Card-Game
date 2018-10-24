@@ -29,11 +29,19 @@ class Deck:
     def __str__(self):
         cards_in_deck = ''
         for card in self.deck:
-            cards_in_deck += '\n ' + card.__str__()  # add each Card object's print string
+            cards_in_deck += '\n ' + card.__str__()
         return 'The deck has:' + cards_in_deck
 
     def shuffle(self):
         random.shuffle(self.deck)
 
+    def get_a_card(self):
+        single_card = self.deck.pop()
+        return single_card
+
+
+test_deck=Deck()
+test_deck.shuffle()
+print(test_deck)
 
 
