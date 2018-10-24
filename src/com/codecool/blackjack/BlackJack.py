@@ -18,6 +18,20 @@ class Card:
         return self.rank + ' of ' + self.suit
 
 
+class Deck:
+
+    def __init__(self):
+        self.deck = []
+        for suit in suits:
+            for rank in ranks:
+                self.deck.append(Card(suit, rank))
+
+    def __str__(self):
+        cards_in_deck = ''
+        for card in self.deck:
+            cards_in_deck += '\n ' + card.__str__()  # add each Card object's print string
+        return 'The deck has:' + cards_in_deck
+
 
 
 
