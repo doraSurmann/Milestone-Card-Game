@@ -72,6 +72,27 @@ class Chips(object):
         self.total -= self.bet
 
 
+# Function definitions to play the game
+
+def take_bet(chips):
+    while True:
+        try:
+            chips.bet = int(input('Enter your bet: '))
+        except ValueError:
+            print("Please give your bet with numbers")
+        else:
+            if chips.bet > chips.total:
+                print('You do not have enough chips')
+            else:
+                break
+
+
+def hit(deck,playercards):
+
+    playercards.add_card(deck.get_a_card())
+    playercards.choose_value_for_ace()
+
+
 
 
 test_deck = Deck()
