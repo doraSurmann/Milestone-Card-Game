@@ -137,54 +137,61 @@ def tie(player, dealer):
 
 # The Game
 
+while True:
+    print("Welcome to my little Black Jack game!")
 
-print("Welcome to my little Black Jack game!")
-
-# new deck & shuffle
-game_deck = Deck()
-game_deck.shuffle()
+    # new deck & shuffle
+    game_deck = Deck()
+    game_deck.shuffle()
 
 
-# Dealer
-dealer = PlayerCards()
-dealer.add_card(game_deck.get_a_card())
-dealer.add_card(game_deck.get_a_card())
+    # Dealer
+    dealer = PlayerCards()
+    dealer.add_card(game_deck.get_a_card())
+    dealer.add_card(game_deck.get_a_card())
 
-# Player
-player = PlayerCards()
-player.add_card(game_deck.get_a_card())
-player.add_card(game_deck.get_a_card())
-player_chips = Chips()
+    # Player
+    player = PlayerCards()
+    player.add_card(game_deck.get_a_card())
+    player.add_card(game_deck.get_a_card())
+    player_chips = Chips()
 
-show_all_cards(player, dealer)
-take_bet(player_chips)
-
-while playing:
-    hit_or_stand(game_deck, player)
-    show_all_cards(player,dealer)
-    if player.total_value > 21:
-        player_lose(player, dealer, player_chips)
-        break
-
-    # If the total is 17 or more, dealer must stand.
-    # If the total is 16 or under, dealer must take a card.
-
-if player.total_value <= 21:
-    while dealer.total_value < 17:
-        hit(game_deck, dealer)
-        print("Dealer hit")
     show_all_cards(player, dealer)
+    take_bet(player_chips)
 
-    if dealer.total_value > 21:
-        player_wins(player, dealer, player_chips)
-    elif dealer.total_value < player.total_value:
-        player_wins(player, dealer, player_chips)
-    elif dealer.total_value > player.total_value:
-        player_lose(player, dealer, player_chips)
+    while playing:
+        hit_or_stand(game_deck, player)
+        show_all_cards(player,dealer)
+        if player.total_value > 21:
+            player_lose(player, dealer, player_chips)
+            break
+
+        # If the total is 17 or more, dealer must stand.
+        # If the total is 16 or under, dealer must take a card.
+
+    if player.total_value <= 21:
+        while dealer.total_value < 17:
+            hit(game_deck, dealer)
+            print("Dealer hit")
+        show_all_cards(player, dealer)
+
+        if dealer.total_value > 21:
+            player_wins(player, dealer, player_chips)
+        elif dealer.total_value < player.total_value:
+            player_wins(player, dealer, player_chips)
+        elif dealer.total_value > player.total_value:
+            player_lose(player, dealer, player_chips)
+        else:
+            tie(player, dealer)
+
+    print("\nPlayer goes home with {} chips!".format(player_chips.total))
+    new_game = input("\nWould you like to play again? y/n ?")
+    if new_game.lower() == "y":
+        playing = True
+        continue
     else:
-        tie(player, dealer)
-
-
+        print("Bye, bye!")
+        break
 
 
 
