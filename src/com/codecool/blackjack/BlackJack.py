@@ -87,10 +87,38 @@ def take_bet(chips):
                 break
 
 
-def hit(deck,playercards):
+def hit(deck, playercards):
 
     playercards.add_card(deck.get_a_card())
     playercards.choose_value_for_ace()
+
+
+def hit_or_stand(deck, playercards):
+    global playing
+
+    while True:
+        x = input("Would you like to Hit or Stand? Enter 'h' or 's' ")
+
+        if x[0].lower() == 'h':
+            hit(deck, playercards)
+
+        elif x[0].lower() == 's':
+            print("Player stands. Dealer's turn")
+            playing = False
+
+        else:
+            print("Please try again. Enter 'h' or 's'")
+            continue
+        break
+
+
+def show_all_cards(playercards, dealercards):
+    print("\nDealer's Hand:", *dealercards.cards, sep='\n ')
+    print("Dealer's Hand =", dealercards.value)
+    print("\nPlayer's Hand:", *playercards.cards, sep='\n ')
+    print("Player's Hand =", playercards.value)
+
+
 
 
 
