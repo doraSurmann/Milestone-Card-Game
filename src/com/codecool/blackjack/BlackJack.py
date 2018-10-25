@@ -119,7 +119,20 @@ def show_all_cards(playercards, dealercards):
     print("Player's Hand =", playercards.value)
 
 
+# Ending scenarios
 
+def player_lose(player, dealer, chips):
+    print("Player lost!")
+    chips.lose_bet()
+
+
+def player_wins(player, dealer, chips):
+    print("Player wins!")
+    chips.win_bet()
+
+
+def tie(player, dealer):
+    print("It's a tie!")
 
 
 
