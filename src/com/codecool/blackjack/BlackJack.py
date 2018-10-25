@@ -113,10 +113,10 @@ def hit_or_stand(deck, playercards):
 
 
 def show_all_cards(playercards, dealercards):
-    print("\nDealer's Hand:", *dealercards.cards, sep='\n ')
-    print("Dealer's Hand =", dealercards.value)
-    print("\nPlayer's Hand:", *playercards.cards, sep='\n ')
-    print("Player's Hand =", playercards.value)
+    print("\nDealer's Hand:", *dealercards.cards_in_hand, sep='\n ')
+    print("Dealer's Hand =", dealercards.total_value)
+    print("\nPlayer's Hand:", *playercards.cards_in_hand, sep='\n ')
+    print("Player's Hand =", playercards.total_value)
 
 
 # Ending scenarios
@@ -135,16 +135,26 @@ def tie(player, dealer):
     print("It's a tie!")
 
 
+# The Game
 
-test_deck = Deck()
-test_deck.shuffle()
-print(test_deck)
+print("Welcome to my little Black Jack game!")
 
-test_player = PlayerCards()
-test_player.add_card(test_deck.get_a_card())
-test_player.add_card(test_deck.get_a_card())
-print(test_player.total_value)
-for card in test_player.cards_in_hand:
-    print(card)
+# new deck & shuffle
+game_deck = Deck()
+game_deck.shuffle()
 
+
+# Dealer
+dealer = PlayerCards()
+dealer.add_card(game_deck.get_a_card())
+dealer.add_card(game_deck.get_a_card())
+
+# Player
+player = PlayerCards()
+player.add_card(game_deck.get_a_card())
+player.add_card(game_deck.get_a_card())
+player_chips = Chips()
+
+show_all_cards(player,dealer)
+take_bet(player_chips)
 
