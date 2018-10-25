@@ -68,7 +68,7 @@ class Chips(object):
     def win(self):
         self.total += self.bet
 
-    def lost(self):
+    def lose(self):
         self.total -= self.bet
 
 
@@ -103,7 +103,7 @@ def hit_or_stand(deck, playercards):
             hit(deck, playercards)
 
         elif x[0].lower() == 's':
-            print("Player stands. Dealer's turn")
+            print("Player stands. Dealer's turn.")
             playing = False
 
         else:
@@ -123,12 +123,12 @@ def show_all_cards(playercards, dealercards):
 
 def player_lose(player, dealer, chips):
     print("Player lost!")
-    chips.lose_bet()
+    chips.lose()
 
 
 def player_wins(player, dealer, chips):
     print("Player wins!")
-    chips.win_bet()
+    chips.win()
 
 
 def tie(player, dealer):
@@ -136,6 +136,7 @@ def tie(player, dealer):
 
 
 # The Game
+
 
 print("Welcome to my little Black Jack game!")
 
@@ -155,6 +156,35 @@ player.add_card(game_deck.get_a_card())
 player.add_card(game_deck.get_a_card())
 player_chips = Chips()
 
-show_all_cards(player,dealer)
+show_all_cards(player, dealer)
 take_bet(player_chips)
+
+while playing:
+    hit_or_stand(game_deck, player)
+    show_all_cards(player,dealer)
+    if player.total_value > 21:
+        player_lose(player, dealer, player_chips)
+        break
+
+    # If the total is 17 or more, dealer must stand.
+    # If the total is 16 or under, dealer must take a card.
+
+if player.total_value <= 21:
+    while dealer.total_value < 17:
+        hit(game_deck, dealer)
+        print("Dealer hit")
+    show_all_cards(player, dealer)
+
+    if dealer.total_value > 21:
+        player_wins(player, dealer, player_chips)
+    elif dealer.total_value < player.total_value:
+        player_wins(player, dealer, player_chips)
+    elif dealer.total_value > player.total_value:
+        player_lose(player, dealer, player_chips)
+    else:
+        tie(player, dealer)
+
+
+
+
 
