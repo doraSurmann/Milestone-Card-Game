@@ -44,14 +44,22 @@ class PlayerCards:
     def __init__(self):
         self.cards_in_hand = []
         self.total_value = 0
-        self.value_of_aces = 0
+        self.aces_track = 0
 
     def add_card(self, card):
         self.cards_in_hand.append(card)
         self.total_value += values[card.rank]
 
+        if card.rank == "Ace":
+            self.aces_track += 1
+
     def choose_value_for_ace(self):
-        pass
+        while self.total_value > 21 and self.aces_track > 0:
+            self.total_value -= 10
+            self.aces_track -= 1
+
+
+
 
 
 test_deck = Deck()
@@ -62,5 +70,7 @@ test_player = PlayerCards()
 test_player.add_card(test_deck.get_a_card())
 test_player.add_card(test_deck.get_a_card())
 print(test_player.total_value)
+for card in test_player.cards_in_hand:
+    print(card)
 
 
