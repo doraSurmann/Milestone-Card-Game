@@ -59,6 +59,18 @@ class PlayerCards:
             self.aces_track -= 1
 
 
+class Chips(object):
+
+    def __init__(self, total=100):
+        self.total = total
+        self.bet = 0
+
+    def win(self):
+        self.total += self.bet
+
+    def lost(self):
+        self.total -= self.bet
+
 
 
 
